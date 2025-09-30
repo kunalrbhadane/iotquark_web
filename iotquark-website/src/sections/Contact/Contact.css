@@ -1,0 +1,73 @@
+/* src/sections/Contact/Contact.css */
+.contact-section {
+  padding: 80px 5%;
+  background-color: transparent;
+}
+.contact-content {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+  
+  /* --- WRAP THE FORM IN A GLASS PANEL --- */
+  background: var(--panel-background);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border: var(--panel-border);
+  border-radius: 20px;
+  padding: 40px;
+  box-shadow: var(--professional-shadow);
+}
+.contact-content h2 {
+  font-family: 'Merriweather', serif;
+  font-size: clamp(2.2rem, 5vw, 3rem);
+  color: var(--text-light);
+  margin: 0 0 15px 0;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+.contact-content p {
+  font-size: 1.1rem;
+  color: var(--text-medium);
+  line-height: 1.6;
+  margin: 0 auto 40px auto;
+  max-width: 600px;
+}
+.contact-details-container {
+  display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-bottom: 40px;
+}
+.contact-detail-item {
+  /* Give these their own, softer glass effect */
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  
+  display: flex; align-items: center; gap: 10px;
+  text-decoration: none; color: var(--text-light);
+  font-weight: 500; padding: 12px 20px; border-radius: 12px;
+  transition: all 0.3s ease;
+}
+.contact-detail-item:hover {
+  transform: translateY(-5px);
+  background-color: rgba(255, 255, 255, 0.1);
+}
+.contact-form { display: grid; gap: 20px; }
+.contact-form input, .contact-form textarea {
+  background-color: rgba(0, 0, 0, 0.3); /* Darker fields for contrast */
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: var(--text-light);
+  font-size: 1rem;
+  font-family: 'Poppins', sans-serif;
+  border-radius: 10px; padding: 15px 20px;
+}
+.contact-form input::placeholder, .contact-form textarea::placeholder { color: var(--text-medium); }
+.submit-btn {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.1rem; font-weight: bold; padding: 15px 30px;
+  background-color: var(--accent-green);
+  color: var(--primary-dark);
+  border: none; border-radius: 10px; cursor: pointer; transition: all 0.3s ease;
+}
+.submit-btn:hover {
+  box-shadow: 0 0 20px var(--accent-green);
+  transform: translateY(-3px);
+}
+@media (max-width: 600px) { /* (No changes) */ }
