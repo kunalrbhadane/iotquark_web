@@ -1,32 +1,102 @@
 /* src/sections/Services/Services.css */
-@keyframes popIn { from { opacity: 0; transform: scale(0.8) translateY(20px); } to { opacity: 1; transform: scale(1) translateY(0); } }
+@keyframes popIn {
+  from { opacity: 0; transform: scale(0.8) translateY(20px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+/* --- NEW: Keyframes for the border rotation animation --- */
+@keyframes rotateBorder {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
 
 .services-section {
   padding: 100px 5%;
   background-color: transparent;
-  display: flex; justify-content: center; align-items: center;
-  gap: 40px; flex-wrap: wrap;
+  display: flex; flex-direction: row; justify-content: center;
+  align-items: stretch; gap: 40px; flex-wrap: wrap;
 }
+
 .service-item {
-  width: 320px; height: 250px;
-  border-radius: 16px;
-  display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;
+  width: 340px; min-height: 420px;
+  border-radius: 20px;
+  display: flex; flex-direction: column; justify-content: flex-start;
+  align-items: center; text-align: center;
+  padding: 40px 30px;
   
-  /* --- MORE DEFINED GLASS PANEL --- */
-  background: rgba(26, 26, 26, 0.8); /* Darker, less transparent background */
-  backdrop-filter: blur(10px); /* Keep the blur for the glass effect */
-  -webkit-backdrop-filter: blur(10px);
-  border: var(--panel-border);
+  background: rgba(26, 26, 26, 0.8);
+  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  
+  /* Remove the static border, as the animation will handle it */
+  border: none;
+  
   box-shadow: var(--professional-shadow);
+  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  opacity: 0;
-  transform: translateY(20px) scale(0.95);
+  opacity: 0; transform: translateY(20px) scale(0.95);
+
+  /* --- NEW: Positioning context for the animated border --- */
+  position: relative;
+  overflow: hidden; /* Important: keeps the border animation contained */
 }
+
+/* --- NEW: Pseudo-elements to create the animated border --- */
+
+/* This is a static border to show when not hovering */
+.service-item::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: inherit; /* Matches the parent's border-radius */
+  z-index: 1;
+}
+
+/* This is the gradient that will rotate on hover */
+.service-item::after {
+  content: '';
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 200%; /* Make it much larger than the card */
+  height: 200%;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0%,
+    transparent 70%,
+    var(--accent-green) 90%,
+    var(--accent-green) 100%
+  );
+  z-index: 0; /* Sits behind the ::before border */
+  transform: translate(-50%, -50%) rotate(0deg); /* Center it and start rotation */
+  
+  opacity: 0; /* Hidden by default */
+  transition: opacity 0.4s ease;
+}
+
 .service-item.is-visible {
   animation: popIn 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
 }
-.service-item:hover { transform: translateY(-12px); box-shadow: 0 16px 40px 0 rgba(0, 0, 0, 0.4); }
+
+/* --- DYNAMIC HOVER EFFECT WITH ROTATING BORDER --- */
+
+.service-item:hover {
+  transform: translateY(-15px) scale(1.03);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 40px rgba(163, 255, 18, 0.4);
+}
+
+.service-item:hover::after {
+  opacity: 1; /* Show the gradient on hover */
+  animation: rotateBorder 4s linear infinite; /* Run the rotation animation */
+}
+
+/* We also need to bring the content above the animated border */
+.service-icon-container,
+.service-item h3,
+.service-details {
+    position: relative;
+    z-index: 2;
+}
 
 .service-icon-container {
   width: 90px; height: 90px;
@@ -34,8 +104,33 @@
   background: rgba(255, 255, 255, 0.1);
   display: flex; justify-content: center; align-items: center;
   margin-bottom: 20px;
+  flex-shrink: 0;
 }
 .service-icon-container img { width: 50px; height: 50px; }
-.service-item h3 { color: var(--text-light); font-weight: 500; font-size: 1.2rem; margin: 0; }
+.service-item h3 {
+  color: var(--text-light); font-weight: 600;
+  font-size: 1.3rem; margin: 0;
+  transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+.service-item:hover h3 {
+  color: var(--accent-green);
+  text-shadow: 0 0 10px rgba(163, 255, 18, 0.5);
+}
 
-@media (max-width: 992px) { /* (No changes) */ }
+.service-details {
+  list-style: none; padding: 0; margin: 25px 0 0 0;
+  text-align: left; width: 100%; max-width: 250px;
+}
+.service-details li {
+  color: var(--text-medium); font-size: 14px;
+  margin-bottom: 12px; display: flex; align-items: flex-start;
+  line-height: 1.5;
+}
+.service-details li::before {
+  content: '✓'; color: var(--accent-green); font-weight: 900;
+  margin-right: 12px; font-size: 15px; display: inline-block;
+  line-height: 1.4;
+}
+
+/* (Mobile responsive styles are unchanged and perfect) */
+@media (max-width: 1140px) { /* ... */ }
