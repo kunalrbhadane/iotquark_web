@@ -1,4 +1,3 @@
-/* src/sections/Contact/Contact.css */
 .contact-section {
   padding: 80px 5%;
   background-color: transparent;
@@ -7,8 +6,6 @@
   max-width: 800px;
   margin: 0 auto;
   text-align: center;
-  
-  /* --- WRAP THE FORM IN A GLASS PANEL --- */
   background: var(--panel-background);
   backdrop-filter: blur(15px);
   -webkit-backdrop-filter: blur(15px);
@@ -32,42 +29,124 @@
   max-width: 600px;
 }
 .contact-details-container {
-  display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-bottom: 40px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
 }
 .contact-detail-item {
-  /* Give these their own, softer glass effect */
   background-color: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.1);
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-  
-  display: flex; align-items: center; gap: 10px;
-  text-decoration: none; color: var(--text-light);
-  font-weight: 500; padding: 12px 20px; border-radius: 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: var(--text-light);
+  font-weight: 500;
+  padding: 12px 20px;
+  border-radius: 12px;
   transition: all 0.3s ease;
 }
 .contact-detail-item:hover {
   transform: translateY(-5px);
   background-color: rgba(255, 255, 255, 0.1);
 }
-.contact-form { display: grid; gap: 20px; }
-.contact-form input, .contact-form textarea {
-  background-color: rgba(0, 0, 0, 0.3); /* Darker fields for contrast */
+.contact-form {
+  display: grid;
+  gap: 20px;
+}
+.contact-form input,
+.contact-form textarea {
+  background-color: rgba(0, 0, 0, 0.3);
   border: 1px solid rgba(255, 255, 255, 0.2);
   color: var(--text-light);
   font-size: 1rem;
   font-family: 'Poppins', sans-serif;
-  border-radius: 10px; padding: 15px 20px;
+  border-radius: 10px;
+  padding: 15px 20px;
 }
-.contact-form input::placeholder, .contact-form textarea::placeholder { color: var(--text-medium); }
+.contact-form input::placeholder,
+.contact-form textarea::placeholder {
+  color: var(--text-medium);
+}
 .submit-btn {
   font-family: 'Poppins', sans-serif;
-  font-size: 1.1rem; font-weight: bold; padding: 15px 30px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  padding: 15px 30px;
   background-color: var(--accent-green);
   color: var(--primary-dark);
-  border: none; border-radius: 10px; cursor: pointer; transition: all 0.3s ease;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 .submit-btn:hover {
   box-shadow: 0 0 20px var(--accent-green);
   transform: translateY(-3px);
 }
-@media (max-width: 600px) { /* (No changes) */ }
+.submit-btn:disabled {
+  background-color: #555;
+  color: #999;
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
+}
+
+/* --- MOBILE RESPONSIVE STYLES --- */
+@media (max-width: 600px) {
+  .contact-content {
+    padding: 25px 20px;
+  }
+
+  .contact-content h2 {
+    font-size: clamp(1.8rem, 7vw, 2.2rem);
+  }
+
+  .contact-details-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+  }
+
+  .contact-detail-item {
+    width: fit-content;
+    padding: 12px 25px;
+  }
+}
+
+/* --- STYLES FOR FORM STATUS MESSAGES --- */
+.status-message {
+  margin-top: 15px;
+  padding: 10px 15px;
+  border-radius: 8px;
+  font-weight: 500;
+  text-align: center;
+  animation: fadeIn 0.5s ease-out;
+}
+
+.status-message.success {
+  background-color: rgba(163, 255, 18, 0.15); /* --accent-green with alpha */
+  color: var(--accent-green);
+  border: 1px solid var(--accent-green);
+}
+
+.status-message.error {
+  background-color: rgba(255, 70, 70, 0.15);
+  color: #ff6b6b;
+  border: 1px solid #ff6b6b;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

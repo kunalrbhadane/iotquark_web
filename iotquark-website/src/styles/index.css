@@ -1,189 +1,99 @@
-/* src/styles/index.css */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Poppins:wght@400;600;700;800&display=swap');
 
 :root {
   --primary-dark: #0A0A0A;
   --accent-green: #A3FF12;
   --text-light: #F5F5F5;
   --text-medium: #B0B0B0;
+  --brand-color-dark-olive: #3f3d32;
+  --brand-color-green: #006400;
   --panel-background: rgba(18, 18, 18, 0.4);
   --panel-border: 1px solid rgba(255, 255, 255, 0.1);
+  --professional-shadow: 0 10px 30px rgba(0,0,0,0.3);
 }
 
-body {
-  margin: 0;
-  font-family: 'Poppins', sans-serif;
-  background-color: var(--primary-dark);
-  color: var(--text-light);
-  overflow: hidden;
+html {
+  scroll-behavior: smooth;
 }
 
+body { 
+  margin: 0; 
+  font-family: 'Poppins', sans-serif; 
+  background-color: var(--primary-dark); 
+  color: var(--text-light); 
+}
 * { box-sizing: border-box; }
 
-.background-video {
-  position: fixed;
-  top: 50%; left: 50%;
-  min-width: 100%; min-height: 100%;
-  width: auto; height: auto;
-  transform: translateX(-50%) translateY(-50%);
-  z-index: 1;
-  object-fit: cover;
-  opacity: 1;
-}
+.background-video { position: fixed; top: 50%; left: 50%; min-width: 100%; min-height: 100%; width: auto; height: auto; transform: translateX(-50%) translateY(-50%); z-index: 1; object-fit: cover; }
+.app-frame { width: 100%; height: 100vh; padding: 30px; position: relative; z-index: 3; }
+.app-shell { width: 100%; height: 100%; display: flex; border-radius: 40px; overflow: hidden; background-color: var(--panel-background); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px); border: var(--panel-border); }
+.site-container { width: 100%; height: 100%; display: grid; grid-template-columns: 100px 1fr; grid-template-rows: 100%; }
 
-.app-frame {
-  width: 100%;
-  height: 100vh;
-  padding: 30px;
-  position: relative;
-  z-index: 3;
-}
+.left-sidebar { padding: 40px 0; background-color: #000000; display: flex; flex-direction: column; justify-content: space-between; align-items: center; text-align: center; position: relative; }
+.left-sidebar::after { content: ''; position: absolute; right: 0; top: 0; width: 1px; height: 100%; background: linear-gradient(to bottom, transparent, var(--accent-green), transparent); opacity: 0.4; box-shadow: 0 0 10px var(--accent-green); }
 
-.app-shell {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  border-radius: 40px;
-  overflow: hidden;
-  background-color: var(--panel-background);
-  backdrop-filter: blur(25px);
-  -webkit-backdrop-filter: blur(25px);
-  border: var(--panel-border);
-}
+.logo-vertical { font-size: 26px; font-weight: 800; writing-mode: vertical-rl; transform: rotate(180deg); letter-spacing: 4px; white-space: nowrap; color: var(--brand-color-dark-olive); }
+.logo-vertical span { font-weight: 800; color: var(--brand-color-green); }
 
-.site-container {
-  width: 100%;
-  height: 100%;
-  display: grid;
-  grid-template-columns: 100px 1fr;
-  grid-template-rows: 100%;
-}
-
-.left-sidebar {
-  padding: 40px 0;
-  background-color: #000000;
-  display: flex; flex-direction: column;
-  justify-content: space-between;
-  align-items: center; text-align: center;
-  position: relative;
-}
-
-.left-sidebar::after {
-  content: '';
-  position: absolute;
-  right: 0;
-  top: 0;
-  width: 1px;
-  height: 100%;
-  background: linear-gradient(to bottom, transparent, var(--accent-green), transparent);
-  opacity: 0.4;
-  box-shadow: 0 0 10px var(--accent-green);
-}
-
-.logo-vertical {
-  font-size: 26px; font-weight: 800;
-  writing-mode: vertical-rl; transform: rotate(180deg);
-  letter-spacing: 4px;
-  white-space: nowrap;
-}
-.logo-vertical span { font-weight: 400; color: var(--accent-green); }
-
-.sidebar-bottom {
-  display: flex; flex-direction: column;
-  align-items: center; gap: 30px; width: 100%;
-}
-
-.follow-us h4 {
-  margin: 0 0 20px 0; font-size: 11px;
-  font-weight: 600;
-  color: var(--text-medium); writing-mode: vertical-rl;
-  transform: rotate(180deg); letter-spacing: 3px;
-}
-
-.social-icons {
-  display: flex; flex-direction: column; gap: 20px;
-}
-
-/* --- THE CORRECTED & FINAL ICON STYLES --- */
-.social-icon-link {
-  display: inline-block;
-  color: var(--text-light); /* Sets the default icon color */
-  transition: transform 0.3s, color 0.3s;
-}
-
-.social-icon-link svg {
-  width: 24px;
-  height: 24px;
-  stroke: currentColor; /* The SVG inherits the 'color' from the 'a' tag */
-  transition: filter 0.3s;
-}
-
-.social-icon-link:hover {
-  transform: scale(1.1) translateY(-3px);
-  color: var(--accent-green); /* Changes the 'a' tag color */
-}
-
-.social-icon-link:hover svg {
-  /* The SVG automatically becomes green by inheriting the new color */
-  filter: drop-shadow(0 0 8px var(--accent-green));
-}
-
-
-.transform-button {
-  border: 1px solid var(--text-medium);
-  border-radius: 50px;
-  color: var(--text-light);
-  text-decoration: none;
-  writing-mode: vertical-rl; transform: rotate(180deg);
-  padding: 20px 10px;
-  white-space: nowrap; transition: all 0.3s ease-in-out;
-  display: flex; align-items: center; gap: 15px;
-  font-size: 13px;
-}
+.sidebar-bottom { display: flex; flex-direction: column; align-items: center; gap: 30px; width: 100%; }
+.follow-us h4 { margin: 0 0 20px 0; font-size: 11px; font-weight: 600; color: var(--text-medium); writing-mode: vertical-rl; transform: rotate(180deg); letter-spacing: 3px; }
+.social-icons { display: flex; flex-direction: column; gap: 20px; }
+.social-icon-link { display: inline-block; color: var(--text-light); transition: transform 0.3s, color 0.3s; }
+.social-icon-link svg { width: 24px; height: 24px; stroke: currentColor; transition: filter 0.3s; }
+.social-icon-link:hover { transform: scale(1.1) translateY(-3px); color: var(--accent-green); }
+.social-icon-link:hover svg { filter: drop-shadow(0 0 8px var(--accent-green)); }
+.transform-button { border: 1px solid var(--text-medium); border-radius: 50px; color: var(--text-light); text-decoration: none; writing-mode: vertical-rl; transform: rotate(180deg); padding: 20px 10px; white-space: nowrap; transition: all 0.3s ease-in-out; display: flex; align-items: center; gap: 15px; font-size: 13px; }
 .transform-button span { transform: rotate(90deg); transition: transform 0.3s ease-in-out; }
-.transform-button:hover {
-  background-color: var(--accent-green);
-  color: var(--primary-dark);
-  border-color: var(--accent-green);
-  box-shadow: 0 0 20px var(--accent-green);
-}
+.transform-button:hover { background-color: var(--accent-green); color: var(--primary-dark); border-color: var(--accent-green); box-shadow: 0 0 20px var(--accent-green); }
 .transform-button:hover span { transform: rotate(0deg); }
 
+.main-content-area { background-color: transparent; overflow-y: auto; padding: 40px; -ms-overflow-style: none; scrollbar-width: none; }
+.main-content-area::-webkit-scrollbar { display: none; }
+section { min-height: 90vh; padding-bottom: 80px; display: flex; flex-direction: column; justify-content: center; }
 
-.main-content-area {
-  background-color: transparent;
-  overflow-y: auto;
-  padding: 40px;
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
 
-.main-content-area::-webkit-scrollbar {
-  display: none;
-}
-
-section {
-  min-height: 90vh;
-  padding-bottom: 80px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
+/* --- FINAL & REWRITTEN MOBILE MEDIA QUERY FOR "APP VIEW" --- */
 @media (max-width: 900px) {
-    .app-frame {
-        padding: 10px;
-    }
-    .app-shell {
-        border-radius: 20px;
-    }
-    .site-container {
-        display: block;
-    }
-    .left-sidebar {
-        display: none;
-    }
-    .main-content-area {
-        height: 100%;
-    }
+  /* 1. Go Edge-to-Edge: Remove the frame's padding completely. */
+  .app-frame {
+    padding: 0;
+    height: auto;
+    min-height: 100vh;
+  }
+
+  /* 2. Neutralize the "glass box" shell to make it invisible. */
+  .app-shell {
+    background: none;
+    border: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    border-radius: 0;
+    height: auto;
+    overflow: visible;
+  }
+
+  /* 3. Standard mobile layout adjustments. */
+  .site-container {
+    display: block;
+  }
+
+  .left-sidebar {
+    display: none;
+  }
+
+  /* 4. Make the main area the primary content container with controlled padding. */
+  .main-content-area {
+    height: auto;
+    overflow-y: visible;
+    /* This becomes the main horizontal padding for all mobile content. */
+    padding: 0 25px; 
+  }
+
+  /* 5. Adjust section spacing for a better mobile flow. */
+  section {
+    min-height: auto;
+    /* Give each section distinct vertical space. */
+    padding-top: 80px;
+    padding-bottom: 80px;
+  }
 }
